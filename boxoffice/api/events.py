@@ -14,8 +14,9 @@ def event_json(event: Event) -> dict:
         "name": event.name,
         "venue": event.venue,
         "starts_at": event.starts_at.isoformat(),
-        "price_cents": event.price_cents,
-        "service_fee_cents": pricing.SERVICE_FEE_CENTS,
+        "price_cents": pricing.order_total_cents(event, 1),
+        "face_value_cents": event.price_cents,
+        "service_fee_cents": pricing.service_fee_cents(1),
         "tickets_left": event.capacity - store().tickets_sold(event.id),
     }
 
